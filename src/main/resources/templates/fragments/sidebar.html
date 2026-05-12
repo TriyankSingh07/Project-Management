@@ -1,0 +1,60 @@
+<!-- sidebar.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<!-- Sidebar Fragment -->
+	<aside id="sidebar" class="sidebar" th:fragment="sidebar">
+
+		<ul class="sidebar-nav" id="sidebar-nav">
+
+			<!-- Dashboard -->
+			<li class="nav-item"><a class="nav-link" th:href="@{/dashboard}">
+					<i class="bi bi-grid"></i> <span>Dashboard</span>
+			</a></li>
+
+			<!-- Icons Menu -->
+			<!-- <li class="nav-item"><a class="nav-link collapsed"
+				data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-stars"></i> <span>Icons</span> <i
+					class="bi bi-chevron-down ms-auto"></i>
+			</a>
+				<ul id="icons-nav" class="nav-content collapse"
+					data-bs-parent="#sidebar-nav">
+					<li><a href="icons-bootstrap.html"> <i
+							class="bi bi-circle"></i> <span>Bootstrap Icons</span>
+					</a></li>
+					<li><a href="icons-remix.html"> <i class="bi bi-circle"></i>
+							<span>Remix Icons</span>
+					</a></li>
+					<li><a href="icons-boxicons.html"> <i class="bi bi-circle"></i>
+							<span>Boxicons</span>
+					</a></li>
+				</ul></li> -->
+
+			<!-- Student Page -->
+			<li class="nav-item"><a class="nav-link collapsed"
+				th:href="@{/studentIndex}"> <i class="bi bi-mortarboard"></i> <span>Student</span>
+			</a></li>
+
+			<li class="nav-item"><a class="nav-link collapsed"
+				th:href="@{/stateIndex}"> <i class="bi bi-geo-alt"></i> <span>State</span>
+			</a></li>
+
+			<li class="nav-item"><a class="nav-link collapsed"
+				th:href="@{/distIndex}"> <i class="bi bi-pin-map-fill"></i> <span>District</span>
+			</a></li>
+
+			<li class="nav-item"><a class="nav-link collapsed"
+				th:href="@{/cityIndex}"> <i class="bi bi-building"></i> <span>City</span>
+			</a></li>
+
+			<!-- Employee Page -->
+			<li class="nav-item"><a class="nav-link collapsed"
+				th:href="@{/employees}"> <i class="bi bi-people"></i> <span>Employees</span>
+			</a></li>
+
+		</ul>
+
+	</aside>
+</body>
+</html>
