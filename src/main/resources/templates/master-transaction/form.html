@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Master Transaction Form</title>
+</head>
+
+<body>
+
+	<h2>Master Transaction Form</h2>
+
+	<form th:action="@{/master-transaction/save}" method="post" th:object="${transaction}">
+
+		<input type="hidden" th:field="*{id}">
+
+		<label>Name:</label>
+
+		<input type="text" th:field="*{name}" placeholder="Enter Name">
+
+		<br><br>
+
+		<label>Status:</label>
+
+		<input type="number" th:field="*{status}" placeholder="Enter Status">
+
+		<br><br>
+
+		<button type="submit">
+			Save
+		</button>
+
+	</form>
+
+</body>
+
+</html>

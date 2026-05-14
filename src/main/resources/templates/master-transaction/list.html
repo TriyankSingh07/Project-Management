@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Master Transaction List</title>
+</head>
+
+<body>
+
+	<h2>Master Transaction List</h2>
+
+	<a th:href="@{/master-transaction/add}">
+		Add New
+	</a>
+
+	<br><br>
+
+	<table border="1" cellpadding="10">
+
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Status</th>
+			<th>Action</th>
+		</tr>
+
+		<tr th:each="data : ${list}">
+
+			<td th:text="${data.id}"></td>
+			<td th:text="${data.name}"></td>
+			<td th:text="${data.status}"></td>
+
+			<td>
+
+				<a th:href="@{'/master-transaction/view/' + ${data.id}}">
+					View
+				</a>
+
+				|
+
+				<a th:href="@{'/master-transaction/edit/' + ${data.id}}">
+					Edit
+				</a>
+
+				|
+
+				<a th:href="@{'/master-transaction/delete/' + ${data.id}}">
+					Delete
+				</a>
+
+			</td>
+
+		</tr>
+
+	</table>
+
+</body>
+
+</html>
