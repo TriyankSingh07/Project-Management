@@ -32,7 +32,31 @@ public class MasterTransactionController {
 
 		model.addAttribute("transaction", new MasterTransaction());
 
-		return "master-transaction/add";
+		return "master-transaction/form";
+	}
+
+	@GetMapping("/edit/{id}")
+	public String editPage(@PathVariable Integer id, Model model) {
+
+		MasterTransaction transaction = service.getById(id);
+		if (transaction == null) {
+			return "redirect:/master-transaction/list";
+		}
+		model.addAttribute("transaction", transaction);
+
+		return "master-transaction/form";
+	}
+
+	@GetMapping("/view/{id}")
+	public String view(@PathVariable Integer id, Model model) {
+
+		MasterTransaction transaction = service.getById(id);
+		if (transaction == null) {
+			return "redirect:/master-transaction/list";
+		}
+		model.addAttribute("transaction", transaction);
+
+		return "master-transaction/view";
 	}
 
 	@PostMapping("/save")

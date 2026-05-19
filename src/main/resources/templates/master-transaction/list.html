@@ -2,58 +2,111 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Master Transaction List</title>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>Master Transactions</title>
+	<link th:href="@{/assets/img/favicon.png}" rel="icon">
+	<link th:href="@{/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+	<link href="https://fonts.gstatic.com" rel="preconnect">
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet">
+	<link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/quill/quill.snow.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/quill/quill.bubble.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/simple-datatables/style.css}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link th:href="@{/assets/css/style.css}" rel="stylesheet">
+	<link th:href="@{/assets/css/custom.css}" rel="stylesheet">
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
+	<div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
-	<h2>Master Transaction List</h2>
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Master Transactions</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/master-transaction/list}">Master</a></li>
+					<li class="breadcrumb-item active">Transactions</li>
+				</ol>
+			</nav>
+		</div>
 
-	<a th:href="@{/master-transaction/add}">
-		Add New
-	</a>
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex justify-content-between align-items-center mb-3">
+								<h5 class="card-title mb-0">All records</h5>
+								<a th:href="@{/master-transaction/add}" class="btn btn-primary">
+									<i class="bi bi-plus-lg"></i> Add new
+								</a>
+							</div>
 
-	<br><br>
+							<div class="table-responsive">
+								<table class="table table-striped table-hover align-middle">
+									<thead>
+										<tr>
+											<th scope="col">ID</th>
+											<th scope="col">Name</th>
+											<th scope="col">Status</th>
+											<th scope="col" class="text-end">Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${#lists.isEmpty(list)}">
+											<td colspan="4" class="text-muted text-center py-4">No transactions yet.</td>
+										</tr>
+										<tr th:each="data : ${list}">
+											<td th:text="${data.id}">1</td>
+											<td th:text="${data.name}">—</td>
+											<td th:text="${data.status}">—</td>
+											<td class="text-end text-nowrap">
+												<a class="btn btn-sm btn-outline-secondary"
+													th:href="@{/master-transaction/view/{id}(id=${data.id})}">
+													<i class="bi bi-eye"></i> View
+												</a>
+												<a class="btn btn-sm btn-outline-primary"
+													th:href="@{/master-transaction/edit/{id}(id=${data.id})}">
+													<i class="bi bi-pencil"></i> Edit
+												</a>
+												<a class="btn btn-sm btn-outline-danger"
+													th:href="@{/master-transaction/delete/{id}(id=${data.id})}"
+													onclick="return confirm('Delete this transaction?');">
+													<i class="bi bi-trash"></i> Delete
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 
-	<table border="1" cellpadding="10">
+	<div th:replace="~{fragments/footer :: footer}"></div>
 
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Status</th>
-			<th>Action</th>
-		</tr>
-
-		<tr th:each="data : ${list}">
-
-			<td th:text="${data.id}"></td>
-			<td th:text="${data.name}"></td>
-			<td th:text="${data.status}"></td>
-
-			<td>
-
-				<a th:href="@{'/master-transaction/view/' + ${data.id}}">
-					View
-				</a>
-
-				|
-
-				<a th:href="@{'/master-transaction/edit/' + ${data.id}}">
-					Edit
-				</a>
-
-				|
-
-				<a th:href="@{'/master-transaction/delete/' + ${data.id}}">
-					Delete
-				</a>
-
-			</td>
-
-		</tr>
-
-	</table>
-
+	<script th:src="@{/assets/vendor/apexcharts/apexcharts.min.js}"></script>
+	<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/assets/vendor/chart.js/chart.umd.js}"></script>
+	<script th:src="@{/assets/vendor/echarts/echarts.min.js}"></script>
+	<script th:src="@{/assets/vendor/quill/quill.js}"></script>
+	<script th:src="@{/assets/vendor/simple-datatables/simple-datatables.js}"></script>
+	<script th:src="@{/assets/vendor/tinymce/tinymce.min.js}"></script>
+	<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+	<script th:src="@{/assets/js/main.js}"></script>
+	<script th:src="@{/assets/js/custom.js}"></script>
 </body>
 
 </html>

@@ -2,38 +2,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>View Transaction</title>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>View Master Transaction</title>
+	<link th:href="@{/assets/img/favicon.png}" rel="icon">
+	<link th:href="@{/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+	<link href="https://fonts.gstatic.com" rel="preconnect">
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet">
+	<link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/quill/quill.snow.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/quill/quill.bubble.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/simple-datatables/style.css}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link th:href="@{/assets/css/style.css}" rel="stylesheet">
+	<link th:href="@{/assets/css/custom.css}" rel="stylesheet">
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
+	<div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
-	<h2>View Transaction</h2>
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Transaction details</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/master-transaction/list}">Master transactions</a></li>
+					<li class="breadcrumb-item active">View</li>
+				</ol>
+			</nav>
+		</div>
 
-	<table border="1" cellpadding="10">
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title mb-4">Record</h5>
+							<dl class="row mb-0">
+								<dt class="col-sm-3">ID</dt>
+								<dd class="col-sm-9" th:text="${transaction.id}">—</dd>
+								<dt class="col-sm-3">Name</dt>
+								<dd class="col-sm-9" th:text="${transaction.name}">—</dd>
+								<dt class="col-sm-3">Status</dt>
+								<dd class="col-sm-9" th:text="${transaction.status}">—</dd>
+							</dl>
+							<div class="d-flex gap-2 mt-4">
+								<a class="btn btn-primary"
+									th:href="@{/master-transaction/edit/{id}(id=${transaction.id})}">
+									<i class="bi bi-pencil"></i> Edit
+								</a>
+								<a class="btn btn-outline-secondary" th:href="@{/master-transaction/list}">
+									<i class="bi bi-arrow-left"></i> Back to list
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 
-		<tr>
-			<th>ID</th>
-			<td th:text="${transaction.id}"></td>
-		</tr>
+	<div th:replace="~{fragments/footer :: footer}"></div>
 
-		<tr>
-			<th>Name</th>
-			<td th:text="${transaction.name}"></td>
-		</tr>
-
-		<tr>
-			<th>Status</th>
-			<td th:text="${transaction.status}"></td>
-		</tr>
-
-	</table>
-
-	<br>
-
-	<a th:href="@{/master-transaction/list}">
-		Back
-	</a>
-
+	<script th:src="@{/assets/vendor/apexcharts/apexcharts.min.js}"></script>
+	<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/assets/vendor/chart.js/chart.umd.js}"></script>
+	<script th:src="@{/assets/vendor/echarts/echarts.min.js}"></script>
+	<script th:src="@{/assets/vendor/quill/quill.js}"></script>
+	<script th:src="@{/assets/vendor/simple-datatables/simple-datatables.js}"></script>
+	<script th:src="@{/assets/vendor/tinymce/tinymce.min.js}"></script>
+	<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+	<script th:src="@{/assets/js/main.js}"></script>
+	<script th:src="@{/assets/js/custom.js}"></script>
 </body>
 
 </html>
