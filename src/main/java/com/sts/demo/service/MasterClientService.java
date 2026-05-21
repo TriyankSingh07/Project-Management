@@ -10,7 +10,5 @@ public interface MasterClientService {
 
 	List<MasterClient> getAll();
 
-//	MasterClient getById(Integer id);
-//
-//	void delete(Integer id);
+	MasterClient getById(Integer id);
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,12 +38,30 @@ public class MasterClientController {
 		return "master-client/form";
 	}
 
+	@GetMapping("/edit/{id}")
+	public String editPage(@PathVariable Integer id, Model model) {
+		MasterClient existing = clientService.getById(id);
+		if (existing == null) {
+			return "redirect:/master-client/list";
+		}
+		model.addAttribute("client", MasterClientFormDto.from(existing));
+		return "master-client/form";
+	}
+
 	@PostMapping("/save")
 	public String save(@Valid @ModelAttribute("client") MasterClientFormDto client, BindingResult bindingResult) {
+		boolean isUpdate = client.getId() != null;
+		if (isUpdate && client.getStatus() == null) {
+			bindingResult.rejectValue("status", "NotNull", "Status is required");
+		}
 		if (bindingResult.hasErrors()) {
 			return "master-client/form";
 		}
-		clientService.save(client.toEntity());
+		MasterClient entity = client.toEntity();
+		if (!isUpdate) {
+			entity.setStatus(1);
+		}
+		clientService.save(entity);
 		return "redirect:/master-client/list";
 	}
 }

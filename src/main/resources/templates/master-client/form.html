@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Create Client</title>
+	<title th:text="${client.id != null ? 'Update Client' : 'Create Client'}">Create Client</title>
 </head>
 
 <body>
@@ -11,7 +11,7 @@
 	<div>
 
 		<div class="pagetitle">
-			<h1>Create Client</h1>
+			<h1 th:text="${client.id != null ? 'Update Client' : 'Create Client'}">Create Client</h1>
 		</div>
 
 		<section class="section">
@@ -20,9 +20,11 @@
 
 				<div class="card-body">
 
-					<h5 class="card-title">Create Client</h5>
+					<h5 class="card-title" th:text="${client.id != null ? 'Update Client' : 'Create Client'}">Create Client</h5>
 
 					<form th:action="@{/master-client/save}" th:object="${client}" method="post">
+
+						<input type="hidden" th:field="*{id}" th:if="${client.id != null}">
 
 						<div class="row">
 
@@ -90,8 +92,8 @@
 
 							</div>
 
-							<!-- Status -->
-							<div class="col-md-4 mb-3">
+							<!-- Status (update only) -->
+							<div class="col-md-4 mb-3" th:if="${client.id != null}">
 
 								<label class="form-label fw-bold">
 									STATUS
@@ -118,7 +120,8 @@
 								Cancel
 							</a>
 
-							<button type="submit" class="btn btn-primary">
+							<button type="submit" class="btn btn-primary"
+								th:text="${client.id != null ? 'Update' : 'Create'}">
 
 								Create
 

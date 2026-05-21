@@ -25,13 +25,8 @@ public class MasterClientServiceImpl implements MasterClientService {
 		return repository.save(client);
 	}
 
-//	@Override
-//	public MasterClient getById(Integer id) {
-//		return repository.findById(id).orElse(null);
-//	}
-//
-//	@Override
-//	public void delete(Integer id) {
-//		repository.deleteById(id);
-//	}
+	@Override
+	public MasterClient getById(Integer id) {
+		return repository.findById(id).orElse(null);
+	}
 }
