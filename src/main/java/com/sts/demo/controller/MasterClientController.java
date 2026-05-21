@@ -5,14 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sts.demo.dto.MasterClientFormDto;
 import com.sts.demo.entity.MasterClient;
-import com.sts.demo.entity.MasterTransaction;
 import com.sts.demo.service.MasterClientService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/master-client")
@@ -30,13 +33,16 @@ public class MasterClientController {
 
 	@GetMapping("/add")
 	public String addPage(Model model) {
-		model.addAttribute("client", new MasterClient());
+		model.addAttribute("client", new MasterClientFormDto());
 		return "master-client/form";
 	}
 
 	@PostMapping("/save")
-	public String save(@ModelAttribute MasterClient client) {
-		clientService.save(client);
+	public String save(@Valid @ModelAttribute("client") MasterClientFormDto client, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "master-client/form";
+		}
+		clientService.save(client.toEntity());
 		return "redirect:/master-client/list";
 	}
 }
