@@ -21,6 +21,15 @@ public class MasterTransaction {
 	@Column(name = "status")
 	private Integer status;
 
+	public MasterTransaction() {
+	}
+
+	public MasterTransaction(Integer id, String name, Integer status) {
+		this.id = id;
+		this.name = name;
+		this.status = status;
+	}
+
 	public Integer getId() {
 		return id;
 	}

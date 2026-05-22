@@ -11,6 +11,4 @@ public interface MasterTransactionService {
 	List<MasterTransaction> getAll();
 
 	MasterTransaction getById(Integer id);
-
-	void delete(Integer id);
 }

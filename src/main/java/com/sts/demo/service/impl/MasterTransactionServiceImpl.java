@@ -16,22 +16,17 @@ public class MasterTransactionServiceImpl implements MasterTransactionService {
 	private MasterTransactionRepository repository;
 
 	@Override
-	public MasterTransaction save(MasterTransaction transaction) {
-		return repository.save(transaction);
-	}
-
-	@Override
 	public List<MasterTransaction> getAll() {
 		return repository.findAll();
 	}
 
 	@Override
-	public MasterTransaction getById(Integer id) {
-		return repository.findById(id).orElse(null);
+	public MasterTransaction save(MasterTransaction transaction) {
+		return repository.save(transaction);
 	}
 
 	@Override
-	public void delete(Integer id) {
-		repository.deleteById(id);
+	public MasterTransaction getById(Integer id) {
+		return repository.findById(id).orElse(null);
 	}
 }
