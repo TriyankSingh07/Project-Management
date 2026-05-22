@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{index::Layout(~{::div})}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Meta</title>
+</head>
+
+<body>
+
+	<div>
+
+		<div class="pagetitle d-flex justify-content-between align-items-center">
+			<h1>META</h1>
+			<nav>
+				<ol class="breadcrumb mb-0">
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item active">Meta</li>
+				</ol>
+			</nav>
+		</div>
+
+		<section class="section">
+
+			<div class="card">
+
+				<div class="card-body">
+
+					<div class="table-responsive">
+
+						<table class="table table-hover">
+
+							<thead>
+								<tr>
+									<th style="background-color:#1e3a5f !important; color:white !important;">#</th>
+									<th style="background-color:#1e3a5f !important; color:white !important;">Name</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>
+										<a href="#" class="text-primary text-decoration-none" data-bs-toggle="modal"
+											data-bs-target="#categoryModal">
+											Category
+										</a>
+									</td>
+								</tr>
+							</tbody>
+
+						</table>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section>
+
+		<!-- Category Popup Modal -->
+		<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+
+					<div class="modal-body p-0">
+
+						<div class="table-responsive">
+
+							<table class="table table-bordered mb-0">
+
+								<thead>
+									<tr>
+										<th style="background-color:#a2d2ff !important; color:black !important; width:80px;">#</th>
+										<th style="background-color:#a2d2ff !important; color:black !important;">Category Name</th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr th:if="${#lists.isEmpty(categories)}">
+										<td colspan="2" class="text-center">No categories found</td>
+									</tr>
+
+									<tr th:each="cat, stat : ${categories}">
+										<td th:text="${stat.count}"></td>
+										<td th:text="${cat.category}"></td>
+									</tr>
+
+								</tbody>
+
+							</table>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>
