@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{index::Layout(~{::div})}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Master Team List</title>
+</head>
+
+<body>
+
+	<div>
+
+		<div class="pagetitle">
+			<h1>Master Teams</h1>
+		</div>
+
+		<section class="section">
+
+			<div class="card">
+
+				<div class="card-body">
+
+					<div class="d-flex justify-content-between align-items-center mb-3">
+
+						<h5 class="card-title">All Teams</h5>
+
+						<a th:href="@{/master-team/add}" class="btn btn-primary">
+							Add New
+						</a>
+
+					</div>
+
+					<div class="table-responsive">
+
+						<table class="table table-hover">
+
+							<thead>
+								<tr>
+									<th style="background-color:#a2d2ff !important; color:black !important;">ID</th>
+									<th style="background-color:#a2d2ff !important; color:black !important;">Team Name</th>
+									<th style="background-color:#a2d2ff !important; color:black !important;">Status</th>
+									<th style="background-color:#a2d2ff !important; color:black !important;">Action</th>
+								</tr>
+							</thead>
+
+							<tbody>
+
+								<tr th:if="${#lists.isEmpty(list)}">
+									<td colspan="4" class="text-center">
+										No Data Found
+									</td>
+								</tr>
+
+								<tr th:each="team : ${list}">
+
+									<td th:text="${team.id}"></td>
+
+									<td th:text="${team.teamName}"></td>
+
+									<td>
+
+										<span th:if="${team.status == 1}" class="badge bg-success">
+
+											Active
+
+										</span>
+
+										<span th:if="${team.status == 0}" class="badge bg-danger">
+
+											Inactive
+
+										</span>
+
+									</td>
+
+									<td>
+										<a th:href="@{'/master-team/edit/' + ${team.id}}"
+											class="btn btn-sm btn-primary">
+											<i class="fa-solid fa-pen-to-square"></i>
+										</a>
+									</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section>
+
+	</div>
+
+</body>
+
+</html>
