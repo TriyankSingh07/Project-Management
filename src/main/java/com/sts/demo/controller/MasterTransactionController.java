@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sts.demo.dto.MasterTransactionFormDto;
 import com.sts.demo.entity.MasterTransaction;
+import com.sts.demo.search.MasterTransactionSearch;
 import com.sts.demo.service.MasterTransactionService;
 
 import jakarta.validation.Valid;
@@ -25,9 +26,10 @@ public class MasterTransactionController {
 	@Autowired
 	private MasterTransactionService transactionService;
 
+	/** Binds search form fields (transactionName, status) from GET query params. */
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<MasterTransaction> list = transactionService.getAll();
+	public String list(@ModelAttribute("search") MasterTransactionSearch search, Model model) {
+		List<MasterTransaction> list = transactionService.search(search);
 		model.addAttribute("list", list);
 		return "master-transaction/list";
 	}
