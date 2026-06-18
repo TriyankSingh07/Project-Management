@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sts.demo.entity.MasterTechnology;
 import com.sts.demo.repository.MasterTechnologyRepository;
+import com.sts.demo.search.MasterTechnologySearch;
 import com.sts.demo.service.MasterTechnologyService;
 
 @Service
@@ -21,6 +22,13 @@ public class MasterTechnologyServiceImpl implements MasterTechnologyService {
 	}
 
 	@Override
+	public List<MasterTechnology> search(MasterTechnologySearch search) {
+		String technologyName = normalize(search.getTechnologyName());
+		Integer status = search.getStatus();
+		return repository.searchByFilters(technologyName, status);
+	}
+
+	@Override
 	public MasterTechnology save(MasterTechnology technology) {
 		return repository.save(technology);
 	}
@@ -28,5 +36,13 @@ public class MasterTechnologyServiceImpl implements MasterTechnologyService {
 	@Override
 	public MasterTechnology getById(Integer id) {
 		return repository.findById(id).orElse(null);
+	}
+
+	/** Blank strings are treated as no filter (same as Yii2 empty search attributes). */
+	private String normalize(String value) {
+		if (value == null || value.trim().isEmpty()) {
+			return null;
+		}
+		return value.trim();
 	}
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{auth/layout :: authLayout(~{::div})}">
+
+<body>
+	<div>
+		<h5 class="text-center mb-4">Sign Up</h5>
+
+		<form th:action="@{/signup}" th:object="${signupForm}" method="post">
+
+			<div class="mb-3">
+				<label for="fullName" class="form-label fw-bold">Full Name</label>
+				<input type="text" id="fullName" th:field="*{fullName}"
+					th:classappend="${#fields.hasErrors('fullName')} ? 'is-invalid'" class="form-control"
+					placeholder="Enter full name">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+			</div>
+
+			<div class="mb-3">
+				<label for="email" class="form-label fw-bold">Email</label>
+				<input type="email" id="email" th:field="*{email}"
+					th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'" class="form-control"
+					placeholder="you@example.com">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+			</div>
+
+			<div class="mb-3">
+				<label for="password" class="form-label fw-bold">Password</label>
+				<input type="password" id="password" th:field="*{password}"
+					th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'" class="form-control"
+					placeholder="At least 6 characters">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+			</div>
+
+			<div class="mb-3">
+				<label for="confirmPassword" class="form-label fw-bold">Confirm Password</label>
+				<input type="password" id="confirmPassword" th:field="*{confirmPassword}"
+					th:classappend="${#fields.hasErrors('confirmPassword')} ? 'is-invalid'" class="form-control"
+					placeholder="Re-enter password">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('confirmPassword')}"
+					th:errors="*{confirmPassword}"></div>
+			</div>
+
+			<button type="submit" class="btn btn-primary w-100 mb-3">Create Account</button>
+		</form>
+
+		<p class="text-center mb-0">
+			Already have an account?
+			<a th:href="@{/login}">Sign in</a>
+		</p>
+	</div>
+</body>
+
+</html>

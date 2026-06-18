@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sts.demo.dto.MasterTechnologyFormDto;
 import com.sts.demo.entity.MasterTechnology;
+import com.sts.demo.search.MasterTechnologySearch;
 import com.sts.demo.service.MasterTechnologyService;
 
 import jakarta.validation.Valid;
@@ -25,16 +26,19 @@ public class MasterTechnologyController {
 	@Autowired
 	private MasterTechnologyService technologyService;
 
+	/** Binds search form fields (technologyName, status) from GET query params. */
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<MasterTechnology> list = technologyService.getAll();
+	public String list(@ModelAttribute("search") MasterTechnologySearch search, Model model) {
+		List<MasterTechnology> list = technologyService.search(search);
 		model.addAttribute("list", list);
 		return "master-technology/list";
 	}
 
 	@GetMapping("/add")
 	public String addPage(Model model) {
-		model.addAttribute("technology", new MasterTechnologyFormDto());
+		MasterTechnologyFormDto technology = new MasterTechnologyFormDto();
+		technology.setStatus(1);
+		model.addAttribute("technology", technology);
 		return "master-technology/form";
 	}
 

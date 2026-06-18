@@ -82,3 +82,14 @@
 .master-transaction-edit:hover {
 	color: #0a58ca;
 }
+
+/* Auth pages */
+.auth-page {
+	background: linear-gradient(135deg, #f6f9ff 0%, #eef4ff 100%);
+}
+
+.auth-card {
+	width: 100%;
+	max-width: 420px;
+	border-radius: 0.75rem;
+}

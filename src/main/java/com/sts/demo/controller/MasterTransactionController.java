@@ -34,11 +34,19 @@ public class MasterTransactionController {
 		return "master-transaction/list";
 	}
 
+	// @GetMapping("/add")
+	// public String addPage(Model model) {
+	// 	model.addAttribute("transaction", new MasterTransactionFormDto());
+	// 	return "master-transaction/form";
+	// }
+
 	@GetMapping("/add")
 	public String addPage(Model model) {
-		model.addAttribute("transaction", new MasterTransactionFormDto());
+		MasterTransactionFormDto transaction = new MasterTransactionFormDto();
+		transaction.setStatus(1); 
+		model.addAttribute("transaction", transaction);
 		return "master-transaction/form";
-	}
+	}	
 
 	@GetMapping("/edit/{id}")
 	public String editPage(@PathVariable Integer id, Model model) {
